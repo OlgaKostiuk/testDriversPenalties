@@ -1,0 +1,38 @@
+﻿@model HistoryViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>State</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Brand</td>
+                <td>@Model.Desctiption</td>
+                <td>@Model.Price</td>
+                <td>@(Model.State == true ? "Paid" : "Unpaid")</td>
+                <td><button type="button" class="btn btn-primary pay @(Model.State == true ? "disabled" : "") " data-id="@Model.HistoryId">Pay</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $(function () {
+        $(".pay").click(function () {
+            location.href = '@Url.Action("Pay")/' + $(this).attr("data-id");
+        });
+    });
+</script>

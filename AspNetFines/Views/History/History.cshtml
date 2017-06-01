@@ -1,0 +1,43 @@
+﻿@model List<HistoryViewModel>
+@{
+    ViewBag.Title = "History";
+}
+
+<h2>History</h2>
+
+@if (Model != null)
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Brand</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>State</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Brand</td>
+                        <td>@item.Desctiption</td>
+                        <td>@item.Price</td>
+                        <td>@(item.State == true ? "Paid" : "Unpaid")</td>
+                        <td><button type="button" class="btn btn-info details" data-id="@item.HistoryId">Details</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<script>
+    $(function () {
+        $(".details").click(function () {
+            location.href = '@Url.Action("Details")/' + $(this).attr("data-id");
+        });
+    });
+</script>
